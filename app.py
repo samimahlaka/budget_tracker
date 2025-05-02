@@ -55,7 +55,11 @@ def transactions():
     cursor.execute('SELECT * FROM transactions')
     transactions = cursor.fetchall()
     conn.close()
-    return render_template('transaction.html', transactions=transactions)
+    total_spending =0
+    for x in transactions:
+        total_spending = total_spending + x[3]
+    
+    return render_template('transaction.html', transactions=transactions, Total_Amount = total_spending)
 
 
 @app.route('/delete_transaction', methods = ['POST'])
