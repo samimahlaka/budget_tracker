@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction</title>
+</head>
+<body>
+    <h2>Transactions</h2>
+    <table border="1"> 
+        <tr>
+            <th> ID </th>
+            <th> DATE </th>
+            <th> DESCRIPTION </th>
+            <th> AMOUNT </th>
+        </tr>
+
+        {% for item in transactions %}
+        <tr>
+          <td>{{ item[0] }}</td>
+          <td>{{ item[1] }}</td>
+          <td>{{ item[2] }}</td>
+          <td>{{ item[3] }}</td>
+        </tr>
+        {% endfor %}
+        
+    </table>
+    <a href="/">Back to home</a>
+</body>
+</html>

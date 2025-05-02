@@ -78,9 +78,6 @@ def delete_transaction():
     conn.close()
     
 
-
-
-
 def main():
 
     print('Welcome to the budget tracker')
@@ -111,4 +108,4 @@ def main():
  
 
 if __name__ == '__main__':
-    main()
+   main()
