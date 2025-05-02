@@ -1,4 +1,4 @@
-from flask import Flask ,request, render_template
+from flask import Flask ,request, render_template, redirect
 import sqlite3
 
 app = Flask(__name__)
@@ -7,6 +7,7 @@ app = Flask(__name__)
 def home():
     return render_template('home.html')
 
+@app.route('/')
 def create_table():
     conn= sqlite3.connect('data/budget.db')
     cursor = conn.cursor()
@@ -19,27 +20,35 @@ def create_table():
     conn.commit()
     conn.close()
 
-@app.route('/add_transaction', methods=['POST'])
-def add_transaction():
+@app.route('/insert_transaction' , methods = ['POST'] )
+def insert_transactions():
     date = request.form['date']
     description = request.form['description']
     amount = request.form['amount']
-
-    print (f'Date : {date}, Description: {description}, Amount: {amount}')
-
-    conn = sqlite3.connect('data/budget.db')
-    cursor = conn.cursor()
-
-    cursor.execute('''INSERT INTO transactions(date,description,amount)
-                   VALUES(?,?,?)''',
-                   (date,description,amount))
+    if amount:
+        amount = float(amount)
     
-    conn.commit()
-    conn.close()
+    if not date or not description or not amount:
+        return ("Please enter all the fields")
+    try:
+        if amount <=0:
+            return("Enter valid amount")
+    except ValueError:
+        return('Please enter valid amount')
 
-    return ('Transaction added successfully')
+    else:
+        conn = sqlite3.connect('data/budget.db')
+        cursor = conn.cursor()
 
-@app.route('/transactions', methods = ['GET'])
+        cursor.execute('''INSERT INTO transactions(date,description,amount)
+                    VALUES(?,?,?)''',
+                    (date,description,amount))
+        
+        conn.commit()
+        conn.close()
+        return ('Transaction added successfully')
+
+@app.route('/view_transactions', methods = ['GET'])
 def transactions():
     conn=sqlite3.connect('data/budget.db')
     cursor = conn.cursor()
@@ -49,6 +58,15 @@ def transactions():
     return render_template('transaction.html', transactions=transactions)
 
 
+@app.route('/delete_transaction', methods = ['POST'])
+def delete_transaction():
+    conn = sqlite3.connect('data/budget.db')
+    cursor = conn.cursor()
+    delete_id = request.form['id']
+    cursor.execute('DELETE from transactions WHERE id = ?', (delete_id,))
+    conn.commit()
+    conn.close()
+    return redirect('/view_transactions')
 
 if __name__ == '__main__':
     create_table()

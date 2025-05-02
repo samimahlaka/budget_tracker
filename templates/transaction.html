@@ -21,7 +21,16 @@
           <td>{{ item[1] }}</td>
           <td>{{ item[2] }}</td>
           <td>{{ item[3] }}</td>
+          <td>
+            <form action="/delete_transaction" method="POST">
+                <input type="hidden" name="id" value="{{item[0]}}">
+                <input type="submit" value="Delete">    
+              </form>
+          </td>
+        
         </tr>
+        
+
         {% endfor %}
         
     </table>
