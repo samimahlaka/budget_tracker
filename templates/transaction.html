@@ -3,16 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
     <title>Transaction</title>
 </head>
 <body>
     <h2>Transactions</h2>
     <table border="1"> 
         <tr>
-            <th> ID </th>
-            <th> DATE </th>
-            <th> DESCRIPTION </th>
-            <th> AMOUNT </th>
+            <th> id </th>
+            <th> Date </th>
+            <th> Description </th>
+            <th> Amount </th>
+            <th> Action</th>
         </tr>
 
         {% for item in transactions %}
@@ -23,8 +25,8 @@
           <td>{{ item[3] }}</td>
           <td>
             <form action="/delete_transaction" method="POST">
-                <input type="hidden" name="id" value="{{item[0]}}">
-                <input type="submit" value="Delete">    
+                <input  type="hidden" name="id" value="{{item[0]}}">
+                <input  type="submit" value="Delete" class="del_btn">    
               </form>
           </td>
         

@@ -1,0 +1,76 @@
+body {
+    max-width: 800px;
+    margin: auto;
+    padding: 40px;
+    text-align: center;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+
+}
+
+table{
+    border-collapse: collapse;
+    width: 90%;
+    margin: auto;
+}
+
+th{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    background-color: blanchedalmond;
+}
+
+tr:nth-child(even) { background-color: #f2f2f2; }
+
+input[type="text"], input[type="number"], input[type="date"] {
+    width: 100%;
+    padding: 10px;
+    margin: 8px ;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+  
+}
+
+.del_btn{
+    padding: 6px 12px;
+    font-size: 14px;
+    width: 100px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 4px;
+ }
+
+.add_btn{
+    background-color:#28a745;
+    color: white;
+    padding : 6px 12px;
+    border: none;
+    border-radius: 4px;
+}
+
+
+h1 { 
+        display: block;
+        font-size: 2em;
+        margin-top: 0.67em;
+        margin-bottom: 0.67em;
+        margin-left: 0;
+        margin-right: 0;
+        font-weight: bold;
+    }
+    h2 {
+        display: block;
+        font-size: 1.5em;
+        margin-top: 0.83em;
+        margin-bottom: 0.83em;
+        margin-left: 0;
+        margin-right: 0;
+        font-weight: bold;
+    }
+
+.add_btn:hover { background-color: #218838; /* a darker green */ }
+.del_btn:hover { background-color: #c82333; /* a darker red */ }     
+
+
+
+    
+

@@ -3,24 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
     <title>Budget Trackert</title>
 </head>
 <body>
     <h1>Welcome to budget tracker</h1>
-    <p>This is your home page</p>
+   
 
     <h2>Add a Transaction</h2>
     <form action="/insert_transaction" method="POST">
-        <label for="date">Date (YY,MM,DD)</label><br>
-        <input type="text" id = 'date' name="date"><br><br>
+        <label for="date">Date: </label>
+        <input type="date" id = 'date' name="date" placeholder="(yy/mm/dd)"><br><br>
         
-        <label for="description">Decription:</label><br>
-        <input type="text" name="description" id="description"><br><br>
+        <label for="description: ">Decription:</label>
+        <input type="text" name="description" id="description" placeholder="e.g (tution fee)"><br><br>
 
-        <label for="amount">Amount:</label><br>
+        <label for="amount">Amount:</label>
         <input type="number" name="amount", id="amount"><br><br>
 
-        <input type="submit" value="Add Transaction">
+        <input type="submit" value="Add Transaction" class="add_btn">
     </form>
 
 </body>
