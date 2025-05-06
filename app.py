@@ -51,10 +51,12 @@ def transactions():
     cursor.execute('SELECT * FROM transactions')
     transactions = cursor.fetchall()
     conn.close()
-    total_spending =0
-    #total_spending = float(total_spending)
-    for x in transactions:
-        total_spending = total_spending + x[3]
+    total_spending =float(0)
+    try:
+        for x in transactions:
+            total_spending = total_spending + float(x[3])
+    except ValueError:
+        pass
     
     return render_template('transaction.html', transactions=transactions, Total_Amount = total_spending)
 
