@@ -6,23 +6,49 @@
     <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
     <title>Budget Trackert</title>
 </head>
+<script>
+    function validate_data() {
+        const date = document.getElementById('date').value.trim()
+        const description = document.getElementById('description').value.trim()
+        const amount = document.getElementById('amount').value.trim()
+
+        if (!date || !description || !amount) {
+            alert('Please fill all the fields')
+            return false
+        }
+        if (amount<= 0 || isNaN(amount)){
+            alert('Please enter valid amount')
+            return false
+        }
+
+        return true
+    }
+</script>
 <body>
     <h1>Welcome to budget tracker</h1>
    
 
     <h2>Add a Transaction</h2>
-    <form action="/insert_transaction" method="POST">
-        <label for="date">Date: </label>
-        <input type="date" id = 'date' name="date" placeholder="(yy/mm/dd)"><br><br>
+    <form method="POST" action="/insert_transaction">
+        {{ form.hidden_tag() }}
         
-        <label for="description: ">Decription:</label>
-        <input type="text" name="description" id="description" placeholder="e.g (tution fee)"><br><br>
-
-        <label for="amount">Amount:</label>
-        <input type="number" name="amount", id="amount"><br><br>
-
-        <input type="submit" value="Add Transaction" class="add_btn">
+        <p>{{ form.date.label }} {{ form.date() }}</p>
+        <p>{{ form.description.label }} {{ form.description() }}</p>
+        <p>{{ form.amount.label }} {{ form.amount() }}</p>
+        
+        {% if form.is_submitted() and form.validate() %}
+            {% if form.errors %}
+                {% for field, errors in form.errors.items() %}
+                    {% for error in errors %}
+                        <p style="color:red;">{{ error }}</p>
+                    {% endfor %}
+                {% endfor %}
+            {% endif %}
+        {% endif %}
+    
+        <p>{{ form.submit() }}</p>
     </form>
-
+    
+    
 </body>
 </html>

@@ -1,13 +1,16 @@
-from flask import Flask ,request, render_template, redirect
+from flask import Flask ,request, render_template, redirect, url_for, flash
 import sqlite3
+from forms import transactionForm
 
 app = Flask(__name__)
+app.secret_key = 'dev123'
 
 @app.route('/')
 def home():
-    return render_template('home.html')
+    form = transactionForm()
+    return render_template('home.html', form=form)
 
-@app.route('/')
+
 def create_table():
     conn= sqlite3.connect('data/budget.db')
     cursor = conn.cursor()
@@ -20,33 +23,26 @@ def create_table():
     conn.commit()
     conn.close()
 
-@app.route('/insert_transaction' , methods = ['POST'] )
+@app.route('/insert_transaction', methods=['POST'])
 def insert_transactions():
-    date = request.form['date']
-    description = request.form['description']
-    amount = request.form['amount']
-    if amount:
-        amount = float(amount)
-    
-    if not date or not description or not amount:
-        return ("Please enter all the fields")
-    try:
-        if amount <=0:
-            return("Enter valid amount")
-    except ValueError:
-        return('Please enter valid amount')
-
-    else:
+    form = transactionForm()
+    if form.validate_on_submit():
+        date = form.date.data
+        description = form.description.data
+        amount = form.amount.data
+        
         conn = sqlite3.connect('data/budget.db')
         cursor = conn.cursor()
-
         cursor.execute('''INSERT INTO transactions(date,description,amount)
-                    VALUES(?,?,?)''',
-                    (date,description,amount))
-        
+                   VALUES(?,?,?)''', (date,description,amount))
         conn.commit()
         conn.close()
-        return ('Transaction added successfully')
+        
+        flash("Transaction added successfully")
+        return redirect('/view_transactions')
+    else:
+        return render_template('home.html', form=form)
+    
 
 @app.route('/view_transactions', methods = ['GET'])
 def transactions():
@@ -56,6 +52,7 @@ def transactions():
     transactions = cursor.fetchall()
     conn.close()
     total_spending =0
+    #total_spending = float(total_spending)
     for x in transactions:
         total_spending = total_spending + x[3]
     
