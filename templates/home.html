@@ -15,9 +15,9 @@
     <form method="POST" action="/insert_transaction">
         {{ form.hidden_tag() }}
         
-        <p>{{ form.date.label }} {{ form.date() }}</p>
-        <p>{{ form.description.label }} {{ form.description() }}</p>
-        <p>{{ form.amount.label }} {{ form.amount() }}</p>
+        <p>{{ form.date.label(class = 'form-label') }} {{ form.date() }}</p>
+        <p>{{ form.description.label(class = 'form-label') }} {{ form.description() }}</p>
+        <p>{{ form.amount.label(class = 'form-label') }} {{ form.amount() }}</p>
         
         {% if form.is_submitted() and form.validate() %}
             {% if form.errors %}

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+    <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
+    <title>Edit</title>
+</head>
+<body>
+
+    <h1> Edit transaction </h1>
+    
+    <form method="POST">
+        {{ form.hidden_tag() }}
+
+        <p>
+            {{ form.date.label }}<br>
+            {{ form.date() }}
+            {% if form.date.errors %}
+                <span style="color:red;">{{ form.date.errors[0] }}</span>
+            {% endif %}
+        </p>
+
+        <p>
+            {{ form.description.label }}<br>
+            {{ form.description() }}
+            {% if form.description.errors %}
+                <span style="color:red;">{{ form.description.errors[0] }}</span>
+            {% endif %}
+        </p>
+
+        <p>
+            {{ form.amount.label }}<br>
+            {{ form.amount() }}
+            {% if form.amount.errors %}
+                <span style="color:red;">{{ form.amount.errors[0] }}</span>
+            {% endif %}
+        </p>
+
+        <p>
+            <button type="submit" class="update_btn"> UPDATE </button>
+        </p>
+
+    </form>
+
+    <a href="/view_transactions">Back</a>
+</body>
+</html>

@@ -72,6 +72,8 @@ h1 {
 
 .submit_btn:hover { background-color: #218838; /* a darker green */ }
 .del_btn:hover { background-color: #c82333; /* a darker red */ }
+.edit_btn:hover { background-color: orange;}
+.update_btn:hover { background-color: orange;}
 
 .total {
     background-color: #f1f1f1;
@@ -95,9 +97,7 @@ h1 {
 text-transform:lowercase
 }
 
-.input_field {
-    
-}
+
 ul {
     list-style-type: none;
     padding: 0;
@@ -111,8 +111,33 @@ ul {
     color: #006600;
     font-weight: bold;
   }
-  
 
+  .form-label {
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 4px;
+    font-size: 15px;
+    text-transform: capitalize;
+}
+.edit_btn {
+    background-color: darkorange;
+    padding: 6px 12px;
+    font-size: 14px;
+    width: 100px;
+    
+    color: white;
+    border: none;
+    border-radius: 4px;
+}
+.update_btn {
+    background-color: darkorange;
+    padding: 6px 12px;
+    font-size: 14px;
+    width: 100px;
+    color: white;
+    border: none;
+    border-radius: 4px;
+}
 
     
 
